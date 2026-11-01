@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Raccourcis (entités XML) pour ne pas répéter les longues URI -->
+<!DOCTYPE rdf:RDF [
+  <!ENTITY tr  "http://example.org/travel#">
+  <!ENTITY d   "http://example.org/travel/data#">
+  <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#">
+]>
+
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:schema="http://schema.org/"
+    xmlns:tr="http://example.org/travel#">
+
+  <!-- ============================================================
+       PARTIE 1 : ONTOLOGIE (SCHÉMA RDFS)
+       ============================================================ -->
+
+  <!-- ===== CLASSES ===== -->
+
+  <rdfs:Class rdf:about="&tr;Destination">
+    <rdfs:label xml:lang="fr">Destination</rdfs:label>
+    <rdfs:comment xml:lang="fr">Un lieu géographique que l'on peut visiter.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://schema.org/Place"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="&tr;Country">
+    <rdfs:label xml:lang="fr">Pays</rdfs:label>
+    <rdfs:subClassOf rdf:resource="&tr;Destination"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="&tr;City">
+    <rdfs:label xml:lang="fr">Ville</rdfs:label>
+    <rdfs:subClassOf rdf:resource="&tr;Destination"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="&tr;Accommodation">
+    <rdfs:label xml:lang="fr">Hébergement</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://schema.org/LodgingBusiness"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="&tr;Hotel">
+    <rdfs:label xml:lang="fr">Hôtel</rdfs:label>
+    <rdfs:subClassOf rdf:resource="&tr;Accommodation"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="&tr;Hostel">
+    <rdfs:label xml:lang="fr">Auberge de jeunesse</rdfs:label>
+    <rdfs:subClassOf rdf:resource="&tr;Accommodation"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="&tr;Traveler">
+    <rdfs:label xml:lang="fr">Voyageur</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="&tr;Booking">
+    <rdfs:label xml:lang="fr">Réservation</rdfs:label>
+    <rdfs:comment xml:lang="fr">Un séjour réservé par un voyageur dans un hébergement.</rdfs:comment>
+  </rdfs:Class>
+
+  <rdfs:Class rdf:about="&tr;Activity">
+    <rdfs:label xml:lang="fr">Activité touristique</rdfs:label>
+  </rdfs:Class>
+
+  <!-- ===== PROPRIÉTÉS ===== -->
+
+  <rdf:Property rdf:about="&tr;locatedIn">
+    <rdfs:label xml:lang="fr">situé à/en</rdfs:label>
+    <rdfs:domain rdf:resource="http://schema.org/Place"/>
+    <rdfs:range  rdf:resource="&tr;Destination"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="&tr;hasVisited">
+    <rdfs:label xml:lang="fr">a visité</rdfs:label>
+    <rdfs:domain rdf:resource="&tr;Traveler"/>
+    <rdfs:range  rdf:resource="&tr;Destination"/>
+  </rdf:Property>
+
+  <!-- SOUS-PROPRIÉTÉ : destination préférée implique a visité -->
+  <rdf:Property rdf:about="&tr;hasFavoriteDestination">
+    <rdfs:label xml:lang="fr">destination préférée</rdfs:label>
+    <rdfs:subPropertyOf rdf:resource="&tr;hasVisited"/>
+    <rdfs:domain rdf:resource="&tr;Traveler"/>
+    <rdfs:range  rdf:resource="&tr;Destination"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="&tr;makesBooking">
+    <rdfs:label xml:lang="fr">effectue la réservation</rdfs:label>
+    <rdfs:domain rdf:resource="&tr;Traveler"/>
+    <rdfs:range  rdf:resource="&tr;Booking"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="&tr;bookedAccommodation">
+    <rdfs:label xml:lang="fr">réserve l'hébergement</rdfs:label>
+    <rdfs:domain rdf:resource="&tr;Booking"/>
+    <rdfs:range  rdf:resource="&tr;Accommodation"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="&tr;offersActivity">
+    <rdfs:label xml:lang="fr">propose l'activité</rdfs:label>
+    <rdfs:domain rdf:resource="&tr;Destination"/>
+    <rdfs:range  rdf:resource="&tr;Activity"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="&tr;pricePerNight">
+    <rdfs:label xml:lang="fr">prix par nuit</rdfs:label>
+    <rdfs:domain rdf:resource="&tr;Accommodation"/>
+    <rdfs:range  rdf:resource="&xsd;decimal"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="&tr;starRating">
+    <rdfs:label xml:lang="fr">nombre d'étoiles</rdfs:label>
+    <rdfs:domain rdf:resource="&tr;Accommodation"/>
+    <rdfs:range  rdf:resource="&xsd;integer"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="&tr;nights">
+    <rdfs:label xml:lang="fr">nombre de nuits</rdfs:label>
+    <rdfs:domain rdf:resource="&tr;Booking"/>
+    <rdfs:range  rdf:resource="&xsd;integer"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="&tr;totalPrice">
+    <rdfs:label xml:lang="fr">prix total</rdfs:label>
+    <rdfs:domain rdf:resource="&tr;Booking"/>
+    <rdfs:range  rdf:resource="&xsd;decimal"/>
+  </rdf:Property>
+
+  <rdf:Property rdf:about="&tr;activityPrice">
+    <rdfs:label xml:lang="fr">prix de l'activité</rdfs:label>
+    <rdfs:domain rdf:resource="&tr;Activity"/>
+    <rdfs:range  rdf:resource="&xsd;decimal"/>
+  </rdf:Property>
+
+
+  <!-- ============================================================
+       PARTIE 2 : DONNÉES (INSTANCES)
+       ============================================================ -->
+
+  <!-- ===== PAYS ===== -->
+  <tr:Country rdf:about="&d;Tunisia"><rdfs:label>Tunisie</rdfs:label></tr:Country>
+  <tr:Country rdf:about="&d;France"><rdfs:label>France</rdfs:label></tr:Country>
+  <tr:Country rdf:about="&d;Italy"><rdfs:label>Italie</rdfs:label></tr:Country>
+
+  <!-- ===== VILLES ===== -->
+  <tr:City rdf:about="&d;Tunis">
+    <rdfs:label>Tunis</rdfs:label>
+    <tr:locatedIn rdf:resource="&d;Tunisia"/>
+    <tr:offersActivity rdf:resource="&d;Medina_Tour"/>
+  </tr:City>
+
+  <tr:City rdf:about="&d;Sousse">
+    <rdfs:label>Sousse</rdfs:label>
+    <tr:locatedIn rdf:resource="&d;Tunisia"/>
+    <tr:offersActivity rdf:resource="&d;Diving_Sousse"/>
+  </tr:City>
+
+  <tr:City rdf:about="&d;Djerba">
+    <rdfs:label>Djerba</rdfs:label>
+    <tr:locatedIn rdf:resource="&d;Tunisia"/>
+    <tr:offersActivity rdf:resource="&d;Quad_Djerba"/>
+  </tr:City>
+
+  <tr:City rdf:about="&d;Paris">
+    <rdfs:label>Paris</rdfs:label>
+    <tr:locatedIn rdf:resource="&d;France"/>
+    <tr:offersActivity rdf:resource="&d;Louvre_Visit"/>
+  </tr:City>
+
+  <tr:City rdf:about="&d;Nice">
+    <rdfs:label>Nice</rdfs:label>
+    <tr:locatedIn rdf:resource="&d;France"/>
+    <tr:offersActivity rdf:resource="&d;Boat_Trip_Nice"/>
+  </tr:City>
+
+  <tr:City rdf:about="&d;Rome">
+    <rdfs:label>Rome</rdfs:label>
+    <tr:locatedIn rdf:resource="&d;Italy"/>
+    <tr:offersActivity rdf:resource="&d;Colosseum_Tour"/>
+  </tr:City>
+
+  <!-- ===== ACTIVITÉS ===== -->
+  <tr:Activity rdf:about="&d;Medina_Tour">
+    <rdfs:label>Visite de la médina</rdfs:label>
+    <tr:activityPrice rdf:datatype="&xsd;decimal">15.00</tr:activityPrice>
+  </tr:Activity>
+
+  <tr:Activity rdf:about="&d;Diving_Sousse">
+    <rdfs:label>Plongée sous-marine</rdfs:label>
+    <tr:activityPrice rdf:datatype="&xsd;decimal">70.00</tr:activityPrice>
+  </tr:Activity>
+
+  <tr:Activity rdf:about="&d;Quad_Djerba">
+    <rdfs:label>Balade en quad</rdfs:label>
+    <tr:activityPrice rdf:datatype="&xsd;decimal">60.00</tr:activityPrice>
+  </tr:Activity>
+
+  <tr:Activity rdf:about="&d;Louvre_Visit">
+    <rdfs:label>Visite du Louvre</rdfs:label>
+    <tr:activityPrice rdf:datatype="&xsd;decimal">22.00</tr:activityPrice>
+  </tr:Activity>
+
+  <tr:Activity rdf:about="&d;Boat_Trip_Nice">
+    <rdfs:label>Excursion en bateau</rdfs:label>
+    <tr:activityPrice rdf:datatype="&xsd;decimal">45.00</tr:activityPrice>
+  </tr:Activity>
+
+  <tr:Activity rdf:about="&d;Colosseum_Tour">
+    <rdfs:label>Visite du Colisée</rdfs:label>
+    <tr:activityPrice rdf:datatype="&xsd;decimal">30.00</tr:activityPrice>
+  </tr:Activity>
+
+  <!-- ===== HÔTELS ===== -->
+  <tr:Hotel rdf:about="&d;Hotel_Medina_Tunis">
+    <rdfs:label>Hôtel Médina Tunis</rdfs:label>
+    <tr:locatedIn rdf:resource="&d;Tunis"/>
+    <tr:starRating rdf:datatype="&xsd;integer">4</tr:starRating>
+    <tr:pricePerNight rdf:datatype="&xsd;decimal">120.00</tr:pricePerNight>
+  </tr:Hotel>
+
+  <tr:Hotel rdf:about="&d;Hotel_Sousse_Beach">
+    <rdfs:label>Sousse Beach Resort</rdfs:label>
+    <tr:locatedIn rdf:resource="&d;Sousse"/>
+    <tr:starRating rdf:datatype="&xsd;integer">5</tr:starRating>
+    <tr:pricePerNight rdf:datatype="&xsd;decimal">180.00</tr:pricePerNight>
+  </tr:Hotel>
+
+  <tr:Hotel rdf:about="&d;Hotel_Djerba_Oasis">
+    <rdfs:label>Djerba Oasis</rdfs:label>
+    <tr:locatedIn rdf:resource="&d;Djerba"/>
+    <tr:starRating rdf:datatype="&xsd;integer">4</tr:starRating>
+    <tr:pricePerNight rdf:datatype="&xsd;decimal">150.00</tr:pricePerNight>
+  </tr:Hotel>
+
+  <tr:Hotel rdf:about="&d;Hotel_Paris_Lumiere">
+    <rdfs:label>Hôtel Paris Lumière</rdfs:label>
+    <tr:locatedIn rdf:resource="&d;Paris"/>
+    <tr:starRating rdf:datatype="&xsd;integer">4</tr:starRating>
+    <tr:pricePerNight rdf:datatype="&xsd;decimal">220.00</tr:pricePerNight>
+  </tr:Hotel>
+
+  <tr:Hotel rdf:about="&d;Hotel_Riviera_Nice">
+    <rdfs:label>Riviera Palace Nice</rdfs:label>
+    <tr:locatedIn rdf:resource="&d;Nice"/>
+    <tr:starRating rdf:datatype="&xsd;integer">5</tr:starRating>
+    <tr:pricePerNight rdf:datatype="&xsd;decimal">310.00</tr:pricePerNight>
+  </tr:Hotel>
+
+  <tr:Hotel rdf:about="&d;Hotel_Colosseo">
+    <rdfs:label>Hotel Colosseo</rdfs:label>
+    <tr:locatedIn rdf:resource="&d;Rome"/>
+    <tr:starRating rdf:datatype="&xsd;integer">3</tr:starRating>
+    <tr:pricePerNight rdf:datatype="&xsd;decimal">130.00</tr:pricePerNight>
+  </tr:Hotel>
+
+  <!-- ===== AUBERGES ===== -->
+  <tr:Hostel rdf:about="&d;Hostel_Tunis_Backpackers">
+    <rdfs:label>Tunis Backpackers</rdfs:label>
+    <tr:locatedIn rdf:resource="&d;Tunis"/>
+    <tr:starRating rdf:datatype="&xsd;integer">2</tr:starRating>
+    <tr:pricePerNight rdf:datatype="&xsd;decimal">30.00</tr:pricePerNight>
+  </tr:Hostel>
+
+  <tr:Hostel rdf:about="&d;Hostel_Roma_Centro">
+    <rdfs:label>Roma Centro Hostel</rdfs:label>
+    <tr:locatedIn rdf:resource="&d;Rome"/>
+    <tr:starRating rdf:datatype="&xsd;integer">2</tr:starRating>
+    <tr:pricePerNight rdf:datatype="&xsd;decimal">40.00</tr:pricePerNight>
+  </tr:Hostel>
+
+  <!-- ===== VOYAGEURS ===== -->
+  <tr:Traveler rdf:about="&d;Ali">
+    <foaf:name>Ali Ben Salah</foaf:name>
+    <foaf:knows rdf:resource="&d;Sara"/>
+    <tr:hasVisited rdf:resource="&d;Paris"/>
+    <tr:hasFavoriteDestination rdf:resource="&d;Rome"/>
+    <tr:makesBooking rdf:resource="&d;B001"/>
+    <tr:makesBooking rdf:resource="&d;B002"/>
+  </tr:Traveler>
+
+  <tr:Traveler rdf:about="&d;Sara">
+    <foaf:name>Sara Trabelsi</foaf:name>
+    <foaf:knows rdf:resource="&d;Karim"/>
+    <tr:makesBooking rdf:resource="&d;B003"/>
+    <tr:makesBooking rdf:resource="&d;B004"/>
+  </tr:Traveler>
+
+  <tr:Traveler rdf:about="&d;Karim">
+    <foaf:name>Karim Jaziri</foaf:name>
+    <tr:hasVisited rdf:resource="&d;Nice"/>
+    <tr:makesBooking rdf:resource="&d;B005"/>
+    <tr:makesBooking rdf:resource="&d;B008"/>
+  </tr:Traveler>
+
+  <tr:Traveler rdf:about="&d;Lina">
+    <foaf:name>Lina Gharbi</foaf:name>
+    <tr:makesBooking rdf:resource="&d;B006"/>
+  </tr:Traveler>
+
+  <tr:Traveler rdf:about="&d;Marc">
+    <foaf:name>Marc Dupont</foaf:name>
+    <tr:makesBooking rdf:resource="&d;B007"/>
+  </tr:Traveler>
+
+  <!-- ===== RÉSERVATIONS (total = nuits × prix par nuit) ===== -->
+  <tr:Booking rdf:about="&d;B001">
+    <tr:bookedAccommodation rdf:resource="&d;Hotel_Sousse_Beach"/>
+    <tr:nights rdf:datatype="&xsd;integer">4</tr:nights>
+    <tr:totalPrice rdf:datatype="&xsd;decimal">720.00</tr:totalPrice>
+  </tr:Booking>
+
+  <tr:Booking rdf:about="&d;B002">
+    <tr:bookedAccommodation rdf:resource="&d;Hotel_Paris_Lumiere"/>
+    <tr:nights rdf:datatype="&xsd;integer">3</tr:nights>
+    <tr:totalPrice rdf:datatype="&xsd;decimal">660.00</tr:totalPrice>
+  </tr:Booking>
+
+  <tr:Booking rdf:about="&d;B003">
+    <tr:bookedAccommodation rdf:resource="&d;Hotel_Sousse_Beach"/>
+    <tr:nights rdf:datatype="&xsd;integer">2</tr:nights>
+    <tr:totalPrice rdf:datatype="&xsd;decimal">360.00</tr:totalPrice>
+  </tr:Booking>
+
+  <tr:Booking rdf:about="&d;B004">
+    <tr:bookedAccommodation rdf:resource="&d;Hostel_Roma_Centro"/>
+    <tr:nights rdf:datatype="&xsd;integer">5</tr:nights>
+    <tr:totalPrice rdf:datatype="&xsd;decimal">200.00</tr:totalPrice>
+  </tr:Booking>
+
+  <tr:Booking rdf:about="&d;B005">
+    <tr:bookedAccommodation rdf:resource="&d;Hotel_Djerba_Oasis"/>
+    <tr:nights rdf:datatype="&xsd;integer">7</tr:nights>
+    <tr:totalPrice rdf:datatype="&xsd;decimal">1050.00</tr:totalPrice>
+  </tr:Booking>
+
+  <tr:Booking rdf:about="&d;B006">
+    <tr:bookedAccommodation rdf:resource="&d;Hotel_Riviera_Nice"/>
+    <tr:nights rdf:datatype="&xsd;integer">2</tr:nights>
+    <tr:totalPrice rdf:datatype="&xsd;decimal">620.00</tr:totalPrice>
+  </tr:Booking>
+
+  <tr:Booking rdf:about="&d;B007">
+    <tr:bookedAccommodation rdf:resource="&d;Hotel_Medina_Tunis"/>
+    <tr:nights rdf:datatype="&xsd;integer">3</tr:nights>
+    <tr:totalPrice rdf:datatype="&xsd;decimal">360.00</tr:totalPrice>
+  </tr:Booking>
+
+  <tr:Booking rdf:about="&d;B008">
+    <tr:bookedAccommodation rdf:resource="&d;Hostel_Tunis_Backpackers"/>
+    <tr:nights rdf:datatype="&xsd;integer">2</tr:nights>
+    <tr:totalPrice rdf:datatype="&xsd;decimal">60.00</tr:totalPrice>
+  </tr:Booking>
+
+</rdf:RDF>
