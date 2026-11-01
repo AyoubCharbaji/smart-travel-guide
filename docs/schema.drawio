@@ -1,0 +1,103 @@
+<mxfile host="65bd71144e">
+    <diagram name="Modèle RDF-RDFS - Smart Travel Guide" id="model">
+        <mxGraphModel dx="1531" dy="717" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1150" background="#ffffff" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="ext_place" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#01579b;fontStyle=1;" value="schema:Place&#xa;(Schema.org)" vertex="1">
+                    <mxGeometry height="60" width="180" x="50" y="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="ext_lodging" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#01579b;fontStyle=1;" value="schema:LodgingBusiness&#xa;(Schema.org)" vertex="1">
+                    <mxGeometry height="60" width="180" x="50" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="ext_person" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f5fe;strokeColor=#01579b;fontStyle=1;" value="foaf:Person&#xa;(FOAF)" vertex="1">
+                    <mxGeometry height="60" width="180" x="700" y="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="cls_destination" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;fontStyle=1;" value="tr:Destination" vertex="1">
+                    <mxGeometry height="60" width="180" x="390" y="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="cls_country" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;" value="tr:Country" vertex="1">
+                    <mxGeometry height="60" width="160" x="300" y="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="cls_city" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;" value="tr:City" vertex="1">
+                    <mxGeometry height="60" width="160" x="500" y="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="cls_accommodation" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;fontStyle=1;" value="tr:Accommodation" vertex="1">
+                    <mxGeometry height="60" width="180" x="390" y="370" as="geometry"/>
+                </mxCell>
+                <mxCell id="cls_hotel" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;" value="tr:Hotel" vertex="1">
+                    <mxGeometry height="60" width="160" x="300" y="480" as="geometry"/>
+                </mxCell>
+                <mxCell id="cls_hostel" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;" value="tr:Hostel" vertex="1">
+                    <mxGeometry height="60" width="160" x="500" y="480" as="geometry"/>
+                </mxCell>
+                <mxCell id="cls_traveler" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;" value="tr:Traveler" vertex="1">
+                    <mxGeometry height="60" width="180" x="700" y="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="cls_booking" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;" value="tr:Booking" vertex="1">
+                    <mxGeometry height="60" width="180" x="700" y="300" as="geometry"/>
+                </mxCell>
+                <mxCell id="cls_activity" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#e65100;" value="tr:Activity" vertex="1">
+                    <mxGeometry height="60" width="180" x="700" y="450" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel_country" edge="1" parent="1" source="cls_country" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#666666;fontSize=11;" target="cls_destination" value="rdfs:subClassOf">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel_city" edge="1" parent="1" source="cls_city" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#666666;fontSize=11;" target="cls_destination" value="rdfs:subClassOf">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel_hotel" edge="1" parent="1" source="cls_hotel" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#666666;fontSize=11;" target="cls_accommodation" value="rdfs:subClassOf">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel_hostel" edge="1" parent="1" source="cls_hostel" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#666666;fontSize=11;" target="cls_accommodation" value="rdfs:subClassOf">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel_traveler" edge="1" parent="1" source="cls_traveler" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#666666;fontSize=11;" target="ext_person" value="rdfs:subClassOf">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel_dest_place" edge="1" parent="1" source="cls_destination" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#666666;fontSize=11;" target="ext_place" value="rdfs:subClassOf">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel_acc_lodging" edge="1" parent="1" source="cls_accommodation" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#666666;fontSize=11;" target="ext_lodging" value="rdfs:subClassOf">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="prop_locatedin" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;" value="tr:locatedIn&#xa;domain: schema:Place&#xa;range: tr:Destination" vertex="1">
+                    <mxGeometry height="75" width="300" x="1030" y="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="prop_hasvisited" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;" value="tr:hasVisited&#xa;domain: tr:Traveler&#xa;range: tr:Destination" vertex="1">
+                    <mxGeometry height="75" width="300" x="1030" y="125" as="geometry"/>
+                </mxCell>
+                <mxCell id="prop_favorite" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;" value="tr:hasFavoriteDestination&#xa;domain: tr:Traveler&#xa;range: tr:Destination&#xa;subPropertyOf: tr:hasVisited" vertex="1">
+                    <mxGeometry height="85" width="300" x="1030" y="263" as="geometry"/>
+                </mxCell>
+                <mxCell id="prop_makesbooking" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;" value="tr:makesBooking&#xa;domain: tr:Traveler&#xa;range: tr:Booking" vertex="1">
+                    <mxGeometry height="75" width="300" x="1030" y="363" as="geometry"/>
+                </mxCell>
+                <mxCell id="prop_bookedaccommodation" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;" value="tr:bookedAccommodation&#xa;domain: tr:Booking&#xa;range: tr:Accommodation" vertex="1">
+                    <mxGeometry height="75" width="300" x="1030" y="460" as="geometry"/>
+                </mxCell>
+                <mxCell id="prop_offersactivity" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;" value="tr:offersActivity&#xa;domain: tr:Destination&#xa;range: tr:Activity" vertex="1">
+                    <mxGeometry height="75" width="300" x="1030" y="558" as="geometry"/>
+                </mxCell>
+                <mxCell id="prop_price" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;" value="tr:pricePerNight&#xa;domain: tr:Accommodation&#xa;range: xsd:decimal" vertex="1">
+                    <mxGeometry height="75" width="300" x="1030" y="653" as="geometry"/>
+                </mxCell>
+                <mxCell id="prop_stars" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;" value="tr:starRating&#xa;domain: tr:Accommodation&#xa;range: xsd:integer" vertex="1">
+                    <mxGeometry height="75" width="300" x="1030" y="742" as="geometry"/>
+                </mxCell>
+                <mxCell id="prop_nights" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;" value="tr:nights&#xa;domain: tr:Booking&#xa;range: xsd:integer" vertex="1">
+                    <mxGeometry height="75" width="300" x="1030" y="829" as="geometry"/>
+                </mxCell>
+                <mxCell id="prop_totalprice" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;" value="tr:totalPrice&#xa;domain: tr:Booking&#xa;range: xsd:decimal" vertex="1">
+                    <mxGeometry height="75" width="300" x="1030" y="922" as="geometry"/>
+                </mxCell>
+                <mxCell id="prop_activityprice" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#2e7d32;" value="tr:activityPrice&#xa;domain: tr:Activity&#xa;range: xsd:decimal" vertex="1">
+                    <mxGeometry height="75" width="300" x="1030" y="1012" as="geometry"/>
+                </mxCell>
+                <mxCell id="rel_subprop" edge="1" parent="1" source="prop_favorite" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeColor=#1565c0;fontSize=11;fontStyle=1;" target="prop_hasvisited" value="rdfs:subPropertyOf">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
